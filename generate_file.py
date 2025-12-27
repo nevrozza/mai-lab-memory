@@ -74,7 +74,7 @@ def generate_transactions() -> list[Transaction]:
                 date=get_date_str(t),
                 time=get_time_str(t),
                 type=random.choice(TRANSACTION_TYPES),
-                amount=random.uniform(100.0, 100_000.0)
+                amount=random.uniform(100.0, 20_000.0)
             )
         )
     return transactions
