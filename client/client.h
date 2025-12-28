@@ -22,4 +22,6 @@ typedef struct {
     Transaction **transactions;
 } Client;
 
+void free_client(Client* c);
+
 #endif //CLIENT_H

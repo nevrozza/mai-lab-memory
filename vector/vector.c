@@ -11,53 +11,63 @@
 struct vector {
     int size;
     int capacity;
-    Client *items;
+    Client **items;
 };
 
 vector init() {
     vector v;
     v.size = 0;
     v.capacity = INITIAL_CAPACITY;
-    v.items = malloc(v.capacity * sizeof(Client));
+    v.items = malloc(v.capacity * sizeof(Client*));
     if (v.items == NULL) {
         memory_error();
     }
     return v;
 }
 
+void destroy(vector *v) {
+    if (!v || !v->items) return;
+    for (int i = 0; i < v->size; i++) {
+        free_client(v->items[i]);
+    }
+    free(v->items);
+    v->items = NULL;
+    v->size = v->capacity = 0;
+}
+
 int size(const vector *v) {
     return v->size;
 }
 
-void resize(vector *v, const int new_size) {
-    if (new_size < v->capacity) {
+void resize(vector *v, const int new_capacity) {
+    if (new_capacity < v->capacity) {
         return;
     }
-    Client *new_items = realloc(v->items, new_size);
+    Client **new_items = realloc(v->items, new_capacity * sizeof(Client*));
     if (new_items == NULL) {
         memory_error();
         free(new_items);
         return;
     }
     v->items = new_items;
-    v->capacity = new_size;
+    v->capacity = new_capacity;
 }
 
-Client get(const vector *v, const int index) {
+Client* get(const vector *v, const int index) {
     return v->items[index];
 }
 
-void set(const vector *v, const int index, const Client client) {
+void set(const vector *v, const int index, Client* client) {
     v->items[index] = client;
 }
 
-void push(vector *v, const Client client) {
+void push(vector *v, Client* client) {
     if (v->size >= v->capacity) {
         resize(v, v->capacity * 2);
     }
     v->items[v->size++] = client;
 }
 
-Client pop(vector *v) {
+Client* pop(vector *v) {
     return v->items[--v->size];
 }
