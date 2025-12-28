@@ -9,7 +9,7 @@
 typedef struct vector vector;
 
 vector* init();
-
+void not_deep_clear(vector *v);
 void destroy(vector *v);
 
 int size(const vector *v);
@@ -23,5 +23,6 @@ void set(const vector *v, int index, Client* client);
 void push(vector *v, Client* client);
 
 Client* pop(vector *v);
+
 
 #endif //VECTOR_H

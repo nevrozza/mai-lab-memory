@@ -1,6 +1,7 @@
 //
 // Created by nevrozq on 28.12.2025.
 //
+#include <stdio.h>
 #include <stdlib.h>
 
 #include "../utils/utils.h"
@@ -13,12 +14,8 @@ Transaction *create_transaction(int day, int month, int year, int hour, int minu
         memory_error();
         return NULL;
     }
-    transaction->day = day;
-    transaction->month = month;
-    transaction->year = year;
-    transaction->hour = hour;
-    transaction->minute = minute;
-    transaction->second = second;
+    transaction->timestamp=timestamp(day, month, year, hour, minute, second);
+
     transaction->is_profit = is_profit;
     transaction->amount = amount;
     return transaction;

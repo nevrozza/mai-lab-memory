@@ -8,4 +8,6 @@
 void error(char msg[]);
 void memory_error();
 
+long long timestamp(int day, int month, int year, int hour, int minute, int second);
+
 #endif //UTILS_H

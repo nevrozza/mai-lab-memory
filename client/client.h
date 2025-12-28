@@ -7,8 +7,7 @@
 #include <stdbool.h>
 
 typedef struct {
-    int day, month, year;
-    int hour, minute, second;
+    long long timestamp;
     bool is_profit;
     double amount;
 } Transaction;

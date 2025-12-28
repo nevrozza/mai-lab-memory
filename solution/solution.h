@@ -10,4 +10,7 @@
 
 vector *read_clients_from_file(FILE *file);
 
+vector *get_solution_clients(vector *clients, char start[15], char end[15]);
+
+
 #endif //SOLUTION_H

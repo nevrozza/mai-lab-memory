@@ -27,6 +27,19 @@ vector *init() {
     return v;
 }
 
+void not_deep_clear(vector *v) {
+    // for (int i = 0; i < v->size; i++) {
+    //     free_client(v->items[i]);
+    // }
+    free(v->items);
+    v->items = malloc(INITIAL_CAPACITY * sizeof(Client *));
+    if (v->items == NULL) {
+        memory_error();
+    }
+    v->size = 0;
+    v->capacity = INITIAL_CAPACITY;
+}
+
 void destroy(vector *v) {
     if (!v || !v->items) return;
     for (int i = 0; i < v->size; i++) {
@@ -34,7 +47,8 @@ void destroy(vector *v) {
     }
     free(v->items);
     v->items = NULL;
-    v->size = v->capacity = 0;
+    v->size = 0;
+    v->capacity = 0;
 }
 
 int size(const vector *v) {
