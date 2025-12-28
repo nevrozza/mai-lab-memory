@@ -24,3 +24,40 @@ vector init() {
     }
     return v;
 }
+
+int size(const vector *v) {
+    return v->size;
+}
+
+void resize(vector *v, const int new_size) {
+    if (new_size < v->capacity) {
+        return;
+    }
+    Client *new_items = realloc(v->items, new_size);
+    if (new_items == NULL) {
+        memory_error();
+        free(new_items);
+        return;
+    }
+    v->items = new_items;
+    v->capacity = new_size;
+}
+
+Client get(const vector *v, const int index) {
+    return v->items[index];
+}
+
+void set(const vector *v, const int index, const Client client) {
+    v->items[index] = client;
+}
+
+void push(vector *v, const Client client) {
+    if (v->size >= v->capacity) {
+        resize(v, v->capacity * 2);
+    }
+    v->items[v->size++] = client;
+}
+
+Client pop(vector *v) {
+    return v->items[--v->size];
+}
