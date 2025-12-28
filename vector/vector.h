@@ -8,7 +8,7 @@
 
 typedef struct vector vector;
 
-vector init();
+vector* init();
 
 void destroy(vector *v);
 

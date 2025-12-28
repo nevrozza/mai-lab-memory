@@ -13,15 +13,21 @@ typedef struct {
     double amount;
 } Transaction;
 
+Transaction *create_transaction(int day, int month, int year, int hour, int minute, int second,
+                                bool is_profit, double amount);
+
 typedef struct {
-    int id;
+    int pid;
     char *surname;
     char *name;
-    char *patronymic;
+    char *middle_name;
     int transaction_count;
     Transaction **transactions;
 } Client;
 
-void free_client(Client* c);
+Client *create_client(int pid, char *surname, char *name, char *middle_name,
+                      int transaction_count, Transaction **transactions);
+
+void free_client(Client *c);
 
 #endif //CLIENT_H
